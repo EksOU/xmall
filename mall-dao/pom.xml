@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-dao</artifactId>
+    <version>${mall-dao-version}</version>
 
 
 </project>

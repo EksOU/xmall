@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-goods-service</artifactId>
+    <version>${mall-goods-serivce-version}</version>
 
 
 </project>

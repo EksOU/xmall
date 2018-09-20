@@ -18,6 +18,12 @@
 
     <properties>
         <java-home>D:\DevApp\Java\jdk</java-home>
+
+        <mall-common-version>1.0.0</mall-common-version>
+        <mall-dao-version>1.0.0</mall-dao-version>
+        <mall-goods-serivce-version>1.0.0</mall-goods-serivce-version>
+        <mall-goods-api-version>1.0.0</mall-goods-api-version>
+        <mall-pojo-version>1.0.0</mall-pojo-version>
     </properties>
 
     <build>
