@@ -15,6 +15,11 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>life.eks</groupId>
+            <artifactId>mall-pojo</artifactId>
+            <version>${mall-pojo-version}</version>
+        </dependency>
     </dependencies>
 
 
