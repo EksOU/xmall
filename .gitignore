@@ -3,13 +3,6 @@ target
 
 logs
 
-# eclipse #
-.settings
-.project
-.classpath
-.log
-.tern-project
-
 # windows #
 Thumbs.db
 
@@ -20,27 +13,49 @@ Thumbs.db
 *.war
 *.ear
 
-# idea #
-.idea
-*.iml
-
 plan.txt
-
 *.class
 
 # Package Files #
 *.jar
 
-
 *.bak
 *.tmp
 *.log
-
-# IDEA metadata and output dirs
-*.ipr
-*.iws
 
 .metadata
 Servers
 session_data
 
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### eclipse ###
+.settings
+.project
+.classpath
+.log
+.tern-project
