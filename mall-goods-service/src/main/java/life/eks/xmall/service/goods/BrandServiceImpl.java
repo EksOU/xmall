@@ -6,7 +6,6 @@ import life.eks.xmall.dao.BrandMapper;
 import life.eks.xmall.pojo.Brand;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,12 +17,10 @@ import java.util.List;
 public class BrandServiceImpl implements BrandService {
 
     @Resource
-    private BrandMapper mapper;
+    private BrandMapper brandMapper;
 
     @Override
     public List<Brand> listBrand() {
-        ArrayList<Brand> brands = new ArrayList<>();
-        brands.add(mapper.selectByPrimaryKey(1L));
-        return brands;
+        return brandMapper.selectByExample(null);
     }
 }

@@ -10,10 +10,83 @@
     <result column="package_list" jdbcType="VARCHAR" property="packageList" />
     <result column="sale_service" jdbcType="VARCHAR" property="saleService" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     goods_id, introduction, specification_items, custom_attribute_items, item_images, 
     package_list, sale_service
   </sql>
+  <select id="selectByExample" parameterType="life.eks.xmall.pojo.GoodsDescExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods_desc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -23,6 +96,12 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from goods_desc
     where goods_id = #{goodsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="life.eks.xmall.pojo.GoodsDescExample">
+    delete from goods_desc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
   </delete>
   <insert id="insert" parameterType="life.eks.xmall.pojo.GoodsDesc">
     insert into goods_desc (goods_id, introduction, specification_items, 
@@ -81,6 +160,54 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="life.eks.xmall.pojo.GoodsDescExample" resultType="java.lang.Long">
+    select count(*) from goods_desc
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods_desc
+    <set>
+      <if test="record.goodsId != null">
+        goods_id = #{record.goodsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.introduction != null">
+        introduction = #{record.introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specificationItems != null">
+        specification_items = #{record.specificationItems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customAttributeItems != null">
+        custom_attribute_items = #{record.customAttributeItems,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemImages != null">
+        item_images = #{record.itemImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packageList != null">
+        package_list = #{record.packageList,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleService != null">
+        sale_service = #{record.saleService,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods_desc
+    set goods_id = #{record.goodsId,jdbcType=BIGINT},
+      introduction = #{record.introduction,jdbcType=VARCHAR},
+      specification_items = #{record.specificationItems,jdbcType=VARCHAR},
+      custom_attribute_items = #{record.customAttributeItems,jdbcType=VARCHAR},
+      item_images = #{record.itemImages,jdbcType=VARCHAR},
+      package_list = #{record.packageList,jdbcType=VARCHAR},
+      sale_service = #{record.saleService,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="life.eks.xmall.pojo.GoodsDesc">
     update goods_desc
     <set>

@@ -19,11 +19,84 @@
     <result column="is_enable_spec" jdbcType="VARCHAR" property="isEnableSpec" />
     <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
   <sql id="Base_Column_List">
     id, seller_id, goods_name, default_item_id, audit_status, is_marketable, brand_id, 
     caption, category1_id, category2_id, category3_id, small_pic, price, type_template_id, 
     is_enable_spec, is_delete
   </sql>
+  <select id="selectByExample" parameterType="life.eks.xmall.pojo.GoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -33,6 +106,12 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from goods
     where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="life.eks.xmall.pojo.GoodsExample">
+    delete from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
   </delete>
   <insert id="insert" parameterType="life.eks.xmall.pojo.Goods">
     insert into goods (id, seller_id, goods_name, 
@@ -151,6 +230,90 @@
       </if>
     </trim>
   </insert>
+  <select id="countByExample" parameterType="life.eks.xmall.pojo.GoodsExample" resultType="java.lang.Long">
+    select count(*) from goods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update goods
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.sellerId != null">
+        seller_id = #{record.sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsName != null">
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultItemId != null">
+        default_item_id = #{record.defaultItemId,jdbcType=BIGINT},
+      </if>
+      <if test="record.auditStatus != null">
+        audit_status = #{record.auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMarketable != null">
+        is_marketable = #{record.isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandId != null">
+        brand_id = #{record.brandId,jdbcType=BIGINT},
+      </if>
+      <if test="record.caption != null">
+        caption = #{record.caption,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category1Id != null">
+        category1_id = #{record.category1Id,jdbcType=BIGINT},
+      </if>
+      <if test="record.category2Id != null">
+        category2_id = #{record.category2Id,jdbcType=BIGINT},
+      </if>
+      <if test="record.category3Id != null">
+        category3_id = #{record.category3Id,jdbcType=BIGINT},
+      </if>
+      <if test="record.smallPic != null">
+        small_pic = #{record.smallPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.typeTemplateId != null">
+        type_template_id = #{record.typeTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isEnableSpec != null">
+        is_enable_spec = #{record.isEnableSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null">
+        is_delete = #{record.isDelete,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update goods
+    set id = #{record.id,jdbcType=BIGINT},
+      seller_id = #{record.sellerId,jdbcType=VARCHAR},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      default_item_id = #{record.defaultItemId,jdbcType=BIGINT},
+      audit_status = #{record.auditStatus,jdbcType=VARCHAR},
+      is_marketable = #{record.isMarketable,jdbcType=VARCHAR},
+      brand_id = #{record.brandId,jdbcType=BIGINT},
+      caption = #{record.caption,jdbcType=VARCHAR},
+      category1_id = #{record.category1Id,jdbcType=BIGINT},
+      category2_id = #{record.category2Id,jdbcType=BIGINT},
+      category3_id = #{record.category3Id,jdbcType=BIGINT},
+      small_pic = #{record.smallPic,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      type_template_id = #{record.typeTemplateId,jdbcType=BIGINT},
+      is_enable_spec = #{record.isEnableSpec,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="life.eks.xmall.pojo.Goods">
     update goods
     <set>
