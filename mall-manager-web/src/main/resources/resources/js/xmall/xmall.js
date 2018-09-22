@@ -1,9 +1,38 @@
-var app = angular.module("xmall", []);
+var app = angular.module("xmall", ['pagination']);
 
 app.controller("brandController", function ($scope, $http) {
-    $scope.list = function () {
-        $http.get("../brand/list").success(function (response) {
-            $scope.brandList = response;
+
+    /**
+     * 分页请求
+     */
+    $scope.list = function (pageNum, pageSize) {
+        $http.get("../brand/list?pageNum=" + pageNum + "&pageSize=" + pageSize).success(function (response) {
+            $scope.brandList = response.list;
+            $scope.paginationConf.totalItems = response.total;
         })
-    }
+    };
+
+    /**
+     * 加载分页
+     */
+    $scope.reloadList = function () {
+        $scope.list($scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
+    };
+
+    /**
+     * 分页控件配置currentPage:当前页
+     * totalItems :总记录数
+     * itemsPerPage:每页记录数
+     * perPageOptions :分页选项
+     * onChange:当页码变更后自动触发的方法
+     */
+    $scope.paginationConf = {
+        currentPage: 1,
+        totalItems: 10,
+        itemsPerPage: 10,
+        perPageOptions: [10, 20, 30, 40, 50],
+        onChange: function () {
+            $scope.reloadList();
+        }
+    };
 });

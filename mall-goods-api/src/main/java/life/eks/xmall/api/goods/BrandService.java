@@ -1,8 +1,7 @@
 package life.eks.xmall.api.goods;
 
+import com.github.pagehelper.PageSerializable;
 import life.eks.xmall.pojo.Brand;
-
-import java.util.List;
 
 /**
  * 商品品牌服务接口
@@ -14,7 +13,9 @@ public interface BrandService {
     /**
      * 获取商品品牌列表
      *
+     * @param pageNum 页码
+     * @param pageSize 每页条数
      * @return 商品品牌列表
      */
-    List<Brand> listBrand();
+    PageSerializable<Brand> listBrand(int pageNum, int pageSize);
 }
