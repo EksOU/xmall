@@ -13,9 +13,14 @@
     <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
     <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../plugins/angularjs/angular.min.js"></script>
-    <script src="../js/xmall/brandController.js"></script>
     <script src="../plugins/angularjs/pagination.js"></script>
 
+    <!-- xmall start -->
+    <script src="../js/xmall/xmall.js"></script>
+    <script src="../js/xmall/controller/baseController.js"></script>
+    <script src="../js/xmall/controller/brandController.js"></script>
+    <script src="../js/xmall/service/brandService.js"></script>
+    <!-- xmall end -->
 </head>
 <body class="hold-transition skin-red sidebar-mini" ng-app="xmall" ng-controller="brandController">
 <!-- .box-body -->
@@ -35,9 +40,11 @@
                     <button type="button" class="btn btn-default" title="新建" data-toggle="modal"
                             data-target="#editModal"><i class="fa fa-file-o"></i> 新建
                     </button>
-                    <button type="button" class="btn btn-default" title="删除" ng-click="del()"><i class="fa fa-trash-o"></i> 删除</button>
-                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i
-                            class="fa fa-refresh"></i> 刷新
+                    <button type="button" class="btn btn-default" title="删除" ng-click="del()">
+                        <i class="fa fa-trash-o"></i> 删除
+                    </button>
+                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();">
+                        <i class="fa fa-refresh"></i> 刷新
                     </button>
                 </div>
             </div>
@@ -45,7 +52,7 @@
         <div class="box-tools pull-right">
             <div class="has-feedback">
                 品牌名称:<input ng-model="searchEntity.name"> 品牌首字母:<input ng-model="searchEntity.firstChar">
-                <button  class="btn btn-default" ng-click="reloadList()">查询</button>
+                <button class="btn btn-default" ng-click="reloadList()">查询</button>
             </div>
         </div>
         <!--工具栏/-->
