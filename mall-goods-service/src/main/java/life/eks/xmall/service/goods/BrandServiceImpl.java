@@ -25,7 +25,7 @@ public class BrandServiceImpl implements BrandService {
     private BrandMapper brandMapper;
 
     @Override
-    public PageSerializable<Brand> listBrand(Brand brand, int pageNum, int pageSize) {
+    public PageSerializable<Brand> list(Brand brand, int pageNum, int pageSize) {
         BrandExample example = new BrandExample();
         if (Objects.nonNull(brand)) {
             BrandExample.Criteria criteria = example.createCriteria();

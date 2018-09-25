@@ -29,6 +29,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>life.eks.xmall</groupId>
+            <artifactId>mall-common</artifactId>
+            <version>${mall-common-version}</version>
+        </dependency>
     </dependencies>
 
 </project>
