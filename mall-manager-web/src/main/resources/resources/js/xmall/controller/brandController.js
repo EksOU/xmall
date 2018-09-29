@@ -23,7 +23,7 @@ xmall.controller("brandController", function ($scope, $controller, brandService)
         brandService.save($scope.brandEntity).success(function (response) {
             if (response.code === 200) {
                 $scope.reloadList();
-                $scope.brandEntity = {};
+                $scope.clearEditModel();
             } else {
                 alert(response.message);
             }
@@ -45,7 +45,7 @@ xmall.controller("brandController", function ($scope, $controller, brandService)
         brandService.update($scope.brandEntity).success(function (response) {
             if (response.code === 200) {
                 $scope.reloadList();
-                $scope.brandEntity = {};
+                $scope.clearEditModel();
             } else {
                 alert(response.message);
             }
@@ -74,5 +74,12 @@ xmall.controller("brandController", function ($scope, $controller, brandService)
                 alert(response.message);
             }
         });
+    };
+
+    /**
+     * 清空editModel
+     */
+    $scope.clearEditModel = function () {
+        $scope.brandEntity = {};
     };
 });

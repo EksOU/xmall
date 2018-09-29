@@ -3,6 +3,7 @@ xmall.controller("skuController", function ($scope, $controller, skuService) {
 
     $scope.searchEntity = {};
     $scope.skuEntity = {};
+    $scope.skuEntity.optionList = [];
 
     /**
      * 获取品牌列表
@@ -23,7 +24,7 @@ xmall.controller("skuController", function ($scope, $controller, skuService) {
         skuService.save($scope.skuEntity).success(function (response) {
             if (response.code === 200) {
                 $scope.reloadList();
-                $scope.skuEntity = {};
+                $scope.clearEditModel();
             } else {
                 alert(response.message);
             }
@@ -45,7 +46,7 @@ xmall.controller("skuController", function ($scope, $controller, skuService) {
         skuService.update($scope.skuEntity).success(function (response) {
             if (response.code === 200) {
                 $scope.reloadList();
-                $scope.skuEntity = {};
+                $scope.clearEditModel();
             } else {
                 alert(response.message);
             }
@@ -75,4 +76,27 @@ xmall.controller("skuController", function ($scope, $controller, skuService) {
             }
         });
     };
+
+    /**
+     * 清空editModel
+     */
+    $scope.clearEditModel = function () {
+        $scope.skuEntity = {};
+        $scope.skuEntity.optionList = [];
+    };
+
+    /**
+     * 增加规格选项行
+     */
+    $scope.addTableRow = function () {
+        $scope.skuEntity.optionList.push({});
+    };
+
+    /**
+     * 删除规格选项行
+     * @param index 删除行下标
+     */
+    $scope.delTableRow = function (index) {
+        $scope.skuEntity.optionList.splice(index, 1);
+    }
 });
