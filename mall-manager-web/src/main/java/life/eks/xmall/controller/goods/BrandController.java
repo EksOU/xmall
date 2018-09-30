@@ -7,6 +7,9 @@ import life.eks.xmall.common.web.Response;
 import life.eks.xmall.pojo.Brand;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 品牌请求
  *
@@ -59,5 +62,10 @@ public class BrandController {
             return Response.fail();
         }
         return Response.success();
+    }
+
+    @RequestMapping("/listOptions")
+    private List<Map<String, Object>> listOptions() {
+        return service.listOptions();
     }
 }
