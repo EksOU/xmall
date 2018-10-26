@@ -54,7 +54,7 @@ public class SpringSecurityConfigure {
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests().antMatchers("/*.html", "/css/**", "/img/**", "/js/**", "/plugins/**").permitAll()
                     .anyRequest().authenticated()
-                    .and().formLogin().loginPage("/login.html").defaultSuccessUrl("/admin/index.html", true).permitAll()
+                    .and().formLogin().loginPage("/login.html").loginProcessingUrl("/login").defaultSuccessUrl("/admin/index.html", true).permitAll()
                     .and().logout().logoutUrl("/logout").permitAll()
                     .and().headers().frameOptions().sameOrigin()
                     .and().csrf().disable();
