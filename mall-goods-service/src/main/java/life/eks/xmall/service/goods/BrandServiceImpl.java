@@ -11,6 +11,8 @@ import life.eks.xmall.pojo.BrandExample;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -60,6 +62,11 @@ public class BrandServiceImpl implements BrandService {
         for (Long id : ids) {
             brandMapper.deleteByPrimaryKey(id);
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> listOptions() {
+        return brandMapper.listOptions();
     }
 }
 

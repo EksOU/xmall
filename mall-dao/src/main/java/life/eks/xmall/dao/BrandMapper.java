@@ -1,6 +1,8 @@
 package life.eks.xmall.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import life.eks.xmall.pojo.Brand;
 import life.eks.xmall.pojo.BrandExample;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +29,6 @@ public interface BrandMapper {
     int updateByPrimaryKeySelective(Brand record);
 
     int updateByPrimaryKey(Brand record);
+
+    List<Map<String, Object>> listOptions();
 }

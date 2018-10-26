@@ -40,4 +40,25 @@ xmall.controller("baseController", function ($scope) {
             $scope.selectedIds.splice(index, 1);
         }
     };
+
+
+    /**
+     * 将json字符串指定key的value值用,拼接后返回
+     * @param jsonString json字符串
+     * @param key 要map的key
+     * @returns {string} map后用,拼接的字符串
+     */
+    $scope.jsonMapToString = function (jsonString, key) {
+        var jsonObj = JSON.parse(jsonString);
+
+        var result = "";
+        for (var i = 0; i < jsonObj.length; i++) {
+            if (i > 0) {
+                result += ",";
+            }
+            result += jsonObj[i][key];
+        }
+
+        return result;
+    }
 });

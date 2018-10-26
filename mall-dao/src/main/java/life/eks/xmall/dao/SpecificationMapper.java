@@ -1,6 +1,8 @@
 package life.eks.xmall.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import life.eks.xmall.pojo.Specification;
 import life.eks.xmall.pojo.SpecificationExample;
 import org.apache.ibatis.annotations.Param;
@@ -27,4 +29,6 @@ public interface SpecificationMapper {
     int updateByPrimaryKeySelective(Specification record);
 
     int updateByPrimaryKey(Specification record);
+
+    List<Map<String, Object>> listOptions();
 }

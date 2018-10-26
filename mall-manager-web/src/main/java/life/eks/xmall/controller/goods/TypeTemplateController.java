@@ -2,35 +2,29 @@ package life.eks.xmall.controller.goods;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageSerializable;
-import life.eks.xmall.api.goods.SkuService;
+import life.eks.xmall.api.goods.TypeTemplateService;
 import life.eks.xmall.common.web.Response;
-import life.eks.xmall.pojo.Specification;
+import life.eks.xmall.pojo.TypeTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-
-/**
- * @author Eks OU
- */
 @RestController
-@RequestMapping("/sku")
-public class SkuController {
+@RequestMapping("/typeTemplate")
+public class TypeTemplateController {
 
     @Reference(version = "1.0.0")
-    private SkuService service;
+    private TypeTemplateService service;
 
     @PostMapping("/list")
-    public PageSerializable<Specification> list(@RequestParam(defaultValue = "1") int pageNum,
-                                                @RequestParam(defaultValue = "10") int pageSize,
-                                                @RequestBody Specification sku) {
-        return service.list(sku, pageNum, pageSize);
+    public PageSerializable<TypeTemplate> list(@RequestParam(defaultValue = "1") int pageNum,
+                                               @RequestParam(defaultValue = "10") int pageSize,
+                                               @RequestBody TypeTemplate typeTemplate) {
+        return service.list(typeTemplate, pageNum, pageSize);
     }
 
     @PostMapping("/save")
-    public Response save(@RequestBody Specification sku) {
+    public Response save(@RequestBody TypeTemplate typeTemplate) {
         try {
-            service.save(sku);
+            service.save(typeTemplate);
         } catch (Exception e) {
             return Response.fail();
         }
@@ -38,9 +32,9 @@ public class SkuController {
     }
 
     @PostMapping("/update")
-    public Response update(@RequestBody Specification sku) {
+    public Response update(@RequestBody TypeTemplate typeTemplate) {
         try {
-            service.update(sku);
+            service.update(typeTemplate);
         } catch (Exception e) {
             return Response.fail();
         }
@@ -48,7 +42,7 @@ public class SkuController {
     }
 
     @GetMapping("/findById")
-    public Specification findById(Long id) {
+    public TypeTemplate findById(Long id) {
         return service.findById(id);
     }
 
@@ -60,10 +54,5 @@ public class SkuController {
             return Response.fail();
         }
         return Response.success();
-    }
-
-    @RequestMapping("/listOptions")
-    private List<Map<String, Object>> listOptions() {
-        return service.listOptions();
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -92,5 +93,10 @@ public class SkuServiceImpl implements SkuService {
             criteria.andSpecIdEqualTo(id);
             optionMapper.deleteByExample(example);
         }
+    }
+
+    @Override
+    public List<Map<String, Object>> listOptions() {
+        return mapper.listOptions();
     }
 }

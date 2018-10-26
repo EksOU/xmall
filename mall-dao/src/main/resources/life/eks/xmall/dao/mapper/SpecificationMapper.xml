@@ -162,4 +162,7 @@
     set spec_name = #{specName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="listOptions" resultType="java.util.Map">
+        select id,spec_name as text from specification
+  </select>
 </mapper>

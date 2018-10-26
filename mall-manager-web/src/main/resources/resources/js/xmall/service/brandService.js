@@ -18,5 +18,9 @@ xmall.service("brandService", function ($http) {
 
     this.del = function (selectedIds) {
         return $http.post("../brand/delete", selectedIds);
+    };
+
+    this.listOptions = function () {
+        return $http.get("../brand/listOptions");
     }
 });
