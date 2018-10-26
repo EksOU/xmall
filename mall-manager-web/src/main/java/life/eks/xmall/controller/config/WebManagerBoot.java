@@ -1,10 +1,11 @@
-package life.eks.xmall.controller;
+package life.eks.xmall.controller.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
  * @author Eks OU
  */
 @SpringBootApplication
+@ComponentScan("life.eks.xmall.controller")
 public class WebManagerBoot {
 
     @Bean
