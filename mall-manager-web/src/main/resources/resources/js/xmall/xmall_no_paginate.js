@@ -1,0 +1,1 @@
+var xmall = angular.module("xmall", []);
