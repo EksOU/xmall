@@ -1,4 +1,4 @@
-package life.eks.xmall.api.goods;
+package life.eks.xmall.api;
 
 import com.github.pagehelper.PageSerializable;
 
@@ -9,31 +9,31 @@ import java.io.Serializable;
  *
  * @author Eks OU
  */
-public interface BaseService<T extends Serializable> {
+public interface BaseService<T extends Serializable, I> {
 
     /**
      * 获取列表
      *
-     * @param goods    查询条件对象
+     * @param target   查询条件对象
      * @param pageNum  页码
      * @param pageSize 每页条数
      * @return 列表
      */
-    PageSerializable<T> list(T goods, int pageNum, int pageSize);
+    PageSerializable<T> list(T target, int pageNum, int pageSize);
 
     /**
      * 保存
      *
-     * @param goods 要保存的对象
+     * @param target 要保存的对象
      */
-    void save(T goods);
+    void save(T target);
 
     /**
      * 更新
      *
-     * @param goods 要更新的对象
+     * @param target 要更新的对象
      */
-    void update(T goods);
+    void update(T target);
 
     /**
      * 根据id获取对象
@@ -41,13 +41,13 @@ public interface BaseService<T extends Serializable> {
      * @param id 对象id
      * @return 对象
      */
-    T findById(Long id);
+    T findById(I id);
 
     /**
      * 对象删除
      *
      * @param ids 要删除的多少对象id列表
      */
-    void delete(Long[] ids);
+    void delete(I[] ids);
 
 }
