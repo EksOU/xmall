@@ -34,6 +34,9 @@ public class SellerServiceImpl implements SellerService {
             if (!StringUtils.isEmpty(target.getNickName())) {
                 criteria.andNickNameLike("%" + target.getNickName() + "%");
             }
+            if (!StringUtils.isEmpty(target.getStatus())) {
+                criteria.andStatusEqualTo(target.getStatus());
+            }
         }
         Page<Seller> targets = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> sellerMapper.selectByExample(example));
         return targets.toPageSerializable();
