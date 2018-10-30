@@ -17,6 +17,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
             <groupId>life.eks.xmall</groupId>
             <artifactId>mall-goods-api</artifactId>
             <version>${mall-goods-api-version}</version>

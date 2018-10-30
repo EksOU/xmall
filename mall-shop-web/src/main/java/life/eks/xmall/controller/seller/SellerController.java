@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import life.eks.xmall.api.seller.SellerService;
 import life.eks.xmall.common.web.Response;
 import life.eks.xmall.pojo.Seller;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class SellerController {
     @PostMapping("/register")
     public Response register(@RequestBody Seller seller) {
         try {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String password = passwordEncoder.encode(seller.getPassword());
+            seller.setPassword(password);
             sellerService.save(seller);
             return Response.success();
         } catch (Exception e) {
