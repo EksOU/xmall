@@ -2,6 +2,7 @@ package life.eks.xmall.pojo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author Eks OU
@@ -38,6 +39,10 @@ public class Goods implements Serializable {
     private String isEnableSpec;
 
     private String isDelete;
+
+    private GoodsDesc desc;
+
+    private List<Item> items;
 
     public Long getId() {
         return id;
@@ -165,5 +170,23 @@ public class Goods implements Serializable {
 
     public void setIsDelete(String isDelete) {
         this.isDelete = isDelete == null ? null : isDelete.trim();
+    }
+
+    public GoodsDesc getDesc() {
+        return desc;
+    }
+
+    public Goods setDesc(GoodsDesc desc) {
+        this.desc = desc;
+        return this;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public Goods setItems(List<Item> items) {
+        this.items = items;
+        return this;
     }
 }
